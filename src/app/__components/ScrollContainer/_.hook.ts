@@ -2,7 +2,14 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 export const useScrollContainer = () => {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const [currentSection, setCurrentSection] = useState(0);
+  // sessionStorageから保存された位置を読み込む
+  const [currentSection, setCurrentSection] = useState(() => {
+    if (typeof window !== "undefined") {
+      const saved = sessionStorage.getItem("scrollSection");
+      return saved ? parseInt(saved, 10) : 0;
+    }
+    return 0;
+  });
   const touchStartY = useRef(0);
   const touchStartX = useRef(0);
   const scrollThrottleRef = useRef<number>(undefined);
@@ -15,6 +22,10 @@ export const useScrollContainer = () => {
         behavior: "smooth",
       });
       setCurrentSection(index);
+      // セクション位置をsessionStorageに保存
+      if (typeof window !== "undefined") {
+        sessionStorage.setItem("scrollSection", String(index));
+      }
     }
   }, []);
 
@@ -280,6 +291,10 @@ export const useScrollContainer = () => {
           newSection <= 4
         ) {
           setCurrentSection(newSection);
+          // セクション位置をsessionStorageに保存
+          if (typeof window !== "undefined") {
+            sessionStorage.setItem("scrollSection", String(newSection));
+          }
         }
 
         scrollThrottleRef.current = undefined;
@@ -300,6 +315,31 @@ export const useScrollContainer = () => {
       }
     };
   }, [currentSection]);
+
+  // マウント時に保存された位置を復元
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const savedSection = sessionStorage.getItem("scrollSection");
+    if (savedSection && scrollContainerRef.current) {
+      const sectionIndex = parseInt(savedSection, 10);
+      if (sectionIndex >= 0 && sectionIndex <= 4) {
+        // 少し遅延を入れて、レンダリング完了後にスクロール
+        const timer = setTimeout(() => {
+          if (scrollContainerRef.current) {
+            const sectionWidth = scrollContainerRef.current.offsetWidth;
+            scrollContainerRef.current.scrollTo({
+              left: sectionWidth * sectionIndex,
+              behavior: "auto", // 即座に移動（smoothだと遅延が発生する）
+            });
+            setCurrentSection(sectionIndex);
+          }
+        }, 100);
+
+        return () => clearTimeout(timer);
+      }
+    }
+  }, []);
 
   return { scrollContainerRef, currentSection, scrollToSection };
 };

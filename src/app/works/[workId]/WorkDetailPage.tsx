@@ -10,7 +10,7 @@ interface WorkDetailPageProps {
   project: Project;
 }
 
-export function WorkDetailPage({ project }: WorkDetailPageProps) {
+export const WorkDetailPage = ({ project }: WorkDetailPageProps) => {
   const router = useRouter();
 
   return (
@@ -115,4 +115,4 @@ export function WorkDetailPage({ project }: WorkDetailPageProps) {
       </div>
     </div>
   );
-}
+};

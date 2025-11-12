@@ -6,13 +6,13 @@ interface WorkDetailPageProps {
   params: Promise<{ workId: string }>;
 }
 
-export async function generateStaticParams() {
+export const generateStaticParams = async () => {
   return PROJECTS.map((project) => ({
     workId: project.workId,
   }));
-}
+};
 
-export default async function Page({ params }: WorkDetailPageProps) {
+const Page = async ({ params }: WorkDetailPageProps) => {
   const { workId } = await params;
   const project = PROJECTS.find((p) => p.workId === workId);
 
@@ -21,4 +21,6 @@ export default async function Page({ params }: WorkDetailPageProps) {
   }
 
   return <WorkDetailPage project={project} />;
-}
+};
+
+export default Page;
