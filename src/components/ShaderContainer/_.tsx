@@ -1,41 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { ChromaFlow, Shader, Swirl } from "shaders/react";
+import { useShaderContainer } from "./_.hook.ts";
 
 export const ShaderContainer = () => {
-  const shaderContainerRef = useRef<HTMLDivElement>(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    const checkShaderReady = () => {
-      if (shaderContainerRef.current) {
-        const canvas = shaderContainerRef.current.querySelector("canvas");
-        if (canvas && canvas.width > 0 && canvas.height > 0) {
-          setIsLoaded(true);
-          return true;
-        }
-      }
-      return false;
-    };
-
-    if (checkShaderReady()) return;
-
-    const intervalId = setInterval(() => {
-      if (checkShaderReady()) {
-        clearInterval(intervalId);
-      }
-    }, 100);
-
-    const fallbackTimer = setTimeout(() => {
-      setIsLoaded(true);
-    }, 1500);
-
-    return () => {
-      clearInterval(intervalId);
-      clearTimeout(fallbackTimer);
-    };
-  }, []);
+  const { shaderContainerRef, isLoaded } = useShaderContainer();
 
   return (
     <div
@@ -45,8 +14,8 @@ export const ShaderContainer = () => {
     >
       <Shader className="h-full w-full">
         <Swirl
-          colorA="#1275d8"
-          colorB="#e19136"
+          colorA="#6366f1"
+          colorB="#8b5cf6"
           speed={0.8}
           detail={0.8}
           blend={50}
@@ -58,11 +27,11 @@ export const ShaderContainer = () => {
           fineY={40}
         />
         <ChromaFlow
-          baseColor="#0066ff"
-          upColor="#0066ff"
-          downColor="#d1d1d1"
-          leftColor="#e19136"
-          rightColor="#e19136"
+          baseColor="#6366f1"
+          upColor="#818cf8"
+          downColor="#a78bfa"
+          leftColor="#8b5cf6"
+          rightColor="#7c3aed"
           intensity={0.9}
           radius={1.8}
           momentum={25}
