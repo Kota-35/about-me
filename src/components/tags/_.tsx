@@ -8,6 +8,14 @@ const iconMap: Record<string, string> = {
   Python: "/python-icon.svg",
   TypeScript: "/typescript-icon.svg",
   Rust: "/rust-icon.svg",
+  Clang: "/clang-icon.svg",
+  Java: "/java-icon.svg",
+  Golang: "/golang-icon.svg",
+  CloudRun: "/cloudrun-icon.svg",
+  React: "/react-icon.svg",
+  Nextjs: "/nextjs-icon.svg",
+  Honojs: "/honojs-icon.svg",
+  K6: "/k6-icon.svg",
   // 必要に応じて他のタグも追加可能
 };
 
