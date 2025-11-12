@@ -16,12 +16,6 @@ export const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
           <span className="text-balance">Kota Ishikuro</span>
         </h1>
 
-        <p className="mb-4 max-w-xl animate-in fade-in slide-in-from-bottom-4 text-2xl font-light leading-relaxed text-foreground duration-1000 delay-200 md:text-3xl">
-          <span className="text-pretty">
-            「分からない」を「できる」に変える。
-          </span>
-        </p>
-
         <p className="mb-8 max-w-xl animate-in fade-in slide-in-from-bottom-4 text-lg leading-relaxed text-foreground/90 duration-1000 delay-300 md:text-xl">
           <span className="text-pretty">
             Transforming business challenges into technical solutions,
