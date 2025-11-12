@@ -27,7 +27,7 @@ export const ScrollContainer = ({
   return (
     <div
       ref={scrollContainerRef}
-      className="h-full w-full overflow-x-auto overflow-y-hidden"
+      className="flex h-full w-full overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory"
     >
       {children}
     </div>

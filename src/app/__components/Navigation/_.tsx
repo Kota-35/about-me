@@ -11,7 +11,7 @@ export const Navigation = ({
   scrollToSection,
   isLoaded,
 }: NavigationProps) => {
-  const navItems = ["Home", "Work", "Services", "About", "Contact"];
+  const navItems = ["Home", "About", "Work", "Contact"];
 
   return (
     <nav

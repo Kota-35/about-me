@@ -6,6 +6,7 @@ import { CustomCursor } from "@/components/CustomCursor";
 import { GrainOverlay } from "@/components/GrainOverlay";
 import { ShaderContainer } from "@/components/ShaderContainer";
 import { useShaderContainer } from "@/components/ShaderContainer/_.hook";
+import { AboutSection } from "./__components/AboutSection";
 import { HeroSection } from "./__components/HeroSection";
 import { Navigation } from "./__components/Navigation";
 import { ScrollContainer } from "./__components/ScrollContainer";
@@ -49,6 +50,10 @@ const Home = () => {
 
       <ScrollContainer onSectionChange={handleSectionChange}>
         <HeroSection scrollToSection={scrollToSection} />
+        <AboutSection
+          scrollToSection={scrollToSection}
+          currentSection={currentSection}
+        />
       </ScrollContainer>
     </main>
   );

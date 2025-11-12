@@ -10,7 +10,7 @@ export const HeroSection = ({
   scrollToSection: _scrollToSection,
 }: HeroSectionProps) => {
   return (
-    <section className="relative flex min-h-screen w-screen shrink-0 flex-col justify-end px-6 pb-16 pt-24 select-none md:px-12 md:pb-24">
+    <section className="relative flex min-h-screen w-screen shrink-0 snap-center flex-col justify-end px-6 pb-16 pt-24 select-none md:px-12 md:pb-24">
       <div className="max-w-3xl">
         <h1 className="mb-6 animate-in fade-in slide-in-from-bottom-8 font-sans text-6xl font-light leading-[1.1] tracking-tight text-foreground duration-1000 md:text-7xl lg:text-8xl">
           <span className="text-balance">Kota Ishikuro</span>
