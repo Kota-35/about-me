@@ -3,6 +3,7 @@
 import clsx from "clsx";
 import { useRef, useState } from "react";
 import { Tag } from "@/components/tags";
+import { ICON_KEYS, type IconKey } from "@/components/tags/constants";
 import { EXPERIMENTS } from "./seed";
 
 interface AboutSectionProps {
@@ -149,12 +150,21 @@ export const AboutSection = ({
                         {/* タグ */}
                         {exp.tags && exp.tags.length > 0 && (
                           <div className="flex flex-wrap gap-2">
-                            {exp.tags.map((tag, tagIndex) => (
-                              <Tag
-                                key={`${exp.id}-${tag}-${tagIndex}`}
-                                name={tag}
-                              />
-                            ))}
+                            {exp.tags.map((tag, tagIndex) => {
+                              // 文字列のタグをIconKeyに変換（型安全でないが、既存データとの互換性のため）
+                              const iconKey = Object.values(ICON_KEYS).includes(
+                                tag as IconKey,
+                              )
+                                ? (tag as IconKey)
+                                : undefined;
+                              return (
+                                <Tag
+                                  key={`${exp.id}-${tag}-${tagIndex}`}
+                                  displayName={tag}
+                                  iconKey={iconKey}
+                                />
+                              );
+                            })}
                           </div>
                         )}
                       </div>
@@ -179,19 +189,24 @@ export const AboutSection = ({
             </h3>
             <div className="flex flex-wrap gap-3">
               {[
-                "Python",
-                "TypeScript",
-                "Rust",
-                "Clang",
-                "Java",
-                "Golang",
-                "CloudRun",
-                "React",
-                "Nextjs",
-                "Honojs",
-                "K6",
+                { displayName: "Python", iconKey: ICON_KEYS.Python },
+                { displayName: "TypeScript", iconKey: ICON_KEYS.TypeScript },
+                { displayName: "Rust", iconKey: ICON_KEYS.Rust },
+                { displayName: "Clang", iconKey: ICON_KEYS.Clang },
+                { displayName: "Java", iconKey: ICON_KEYS.Java },
+                { displayName: "Golang", iconKey: ICON_KEYS.Golang },
+                { displayName: "Cloud Run", iconKey: ICON_KEYS.CloudRun },
+                { displayName: "React", iconKey: ICON_KEYS.React },
+                { displayName: "Next.js", iconKey: ICON_KEYS.Nextjs },
+                { displayName: "Hono", iconKey: ICON_KEYS.Honojs },
+                { displayName: "k6", iconKey: ICON_KEYS.K6 },
               ].map((skill) => (
-                <Tag key={skill} name={skill} size="md" />
+                <Tag
+                  key={skill.displayName}
+                  displayName={skill.displayName}
+                  iconKey={skill.iconKey}
+                  size="md"
+                />
               ))}
             </div>
           </div>

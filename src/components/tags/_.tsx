@@ -2,31 +2,24 @@
 
 import clsx from "clsx";
 import Image from "next/image";
-
-// タグ名からアイコンパスへのマッピング
-const iconMap: Record<string, string> = {
-  Python: "/python-icon.svg",
-  TypeScript: "/typescript-icon.svg",
-  Rust: "/rust-icon.svg",
-  Clang: "/clang-icon.svg",
-  Java: "/java-icon.svg",
-  Golang: "/golang-icon.svg",
-  CloudRun: "/cloudrun-icon.svg",
-  React: "/react-icon.svg",
-  Nextjs: "/nextjs-icon.svg",
-  Honojs: "/honojs-icon.svg",
-  K6: "/k6-icon.svg",
-  // 必要に応じて他のタグも追加可能
-};
+import type { IconKey } from "./constants";
+import { ICON_MAP } from "./constants";
 
 interface TagProps {
-  name: string;
+  displayName: string; // 表示名
+  iconKey?: IconKey; // アイコンマッピング用のキー（省略可能）
   size?: "sm" | "md" | "lg";
   className?: string;
 }
 
-export const Tag = ({ name, size = "sm", className }: TagProps) => {
-  const iconPath = iconMap[name];
+export const Tag = ({
+  displayName,
+  iconKey,
+  size = "sm",
+  className,
+}: TagProps) => {
+  // iconKeyが指定されている場合はそれを使用
+  const iconPath = iconKey ? ICON_MAP[iconKey] : undefined;
   const hasIcon = !!iconPath;
 
   // サイズに応じたスタイル
@@ -61,14 +54,14 @@ export const Tag = ({ name, size = "sm", className }: TagProps) => {
       {hasIcon && (
         <Image
           src={iconPath}
-          alt={name}
+          alt={displayName}
           width={styles.iconSize}
           height={styles.iconSize}
           className={styles.icon}
           unoptimized
         />
       )}
-      {name}
+      {displayName}
     </span>
   );
 };

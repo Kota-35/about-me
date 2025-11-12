@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { MagneticButton } from "@/components/MagneticButton";
 import { Tag } from "@/components/tags";
+import { ICON_KEYS } from "@/components/tags/constants";
 
 interface HeroSectionProps {
   scrollToSection?: ((index: number) => void) | null;
@@ -30,9 +31,9 @@ export const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
         </div>
 
         <div className="mb-8 flex animate-in fade-in slide-in-from-bottom-4 flex-wrap gap-2 duration-1000 delay-400">
-          <Tag name="Python" />
-          <Tag name="TypeScript" />
-          <Tag name="Rust" />
+          <Tag displayName="Python" iconKey={ICON_KEYS.Python} />
+          <Tag displayName="TypeScript" iconKey={ICON_KEYS.TypeScript} />
+          <Tag displayName="Rust" iconKey={ICON_KEYS.Rust} />
         </div>
 
         <div className="flex animate-in fade-in slide-in-from-bottom-4 flex-col gap-4 duration-1000 delay-300 sm:flex-row sm:items-center">

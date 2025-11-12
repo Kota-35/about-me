@@ -66,11 +66,25 @@ export const WorkDetailPage = ({ project }: WorkDetailPageProps) => {
           </div>
         </div>
 
+        {/* プロジェクト概要 */}
+        {project.overview && (
+          <section className="mb-12">
+            <h2 className="mb-4 font-sans text-2xl font-light text-foreground md:text-3xl">
+              プロジェクト概要
+            </h2>
+            <div className="space-y-4">
+              <p className="leading-relaxed text-foreground/90 md:text-lg">
+                {project.overview}
+              </p>
+            </div>
+          </section>
+        )}
+
         {/* 設計思想 */}
         {project.designPhilosophy && (
           <section className="mb-12">
             <h2 className="mb-4 font-sans text-2xl font-light text-foreground md:text-3xl">
-              Design Philosophy
+              開発の考え方
             </h2>
             <div className="space-y-4">
               <p className="leading-relaxed text-foreground/90 md:text-lg">
@@ -81,24 +95,41 @@ export const WorkDetailPage = ({ project }: WorkDetailPageProps) => {
         )}
 
         {/* 技術スタック */}
-        {project.technologies && project.technologies.length > 0 && (
-          <section className="mb-12">
-            <h2 className="mb-4 font-sans text-2xl font-light text-foreground md:text-3xl">
-              Technologies
-            </h2>
-            <div className="flex flex-wrap gap-3">
-              {project.technologies.map((tech) => (
-                <Tag key={tech} name={tech} size="md" />
-              ))}
-            </div>
-          </section>
-        )}
+        {project.technologies &&
+          Object.keys(project.technologies).length > 0 && (
+            <section className="mb-12">
+              <h2 className="mb-4 font-sans text-2xl font-light text-foreground md:text-3xl">
+                技術スタック
+              </h2>
+              <div className="space-y-6">
+                {Object.entries(project.technologies).map(
+                  ([category, techs]) => (
+                    <div key={category}>
+                      <h3 className="mb-3 font-sans text-lg font-light text-foreground/80 md:text-xl">
+                        {category}
+                      </h3>
+                      <div className="flex flex-wrap gap-3">
+                        {techs.map((tech) => (
+                          <Tag
+                            key={tech.displayName}
+                            displayName={tech.displayName}
+                            iconKey={tech.iconKey}
+                            size="md"
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ),
+                )}
+              </div>
+            </section>
+          )}
 
         {/* 主な機能 */}
         {project.features && project.features.length > 0 && (
           <section className="mb-12">
             <h2 className="mb-4 font-sans text-2xl font-light text-foreground md:text-3xl">
-              Key Features
+              主な機能
             </h2>
             <ul className="space-y-3">
               {project.features.map((feature) => (
@@ -107,6 +138,96 @@ export const WorkDetailPage = ({ project }: WorkDetailPageProps) => {
                   className="relative pl-6 text-foreground/90 before:absolute before:left-0 before:content-['•'] md:text-lg"
                 >
                   {feature}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {/* システムアーキテクチャ */}
+        {project.architecture && (
+          <section className="mb-12">
+            <h2 className="mb-4 font-sans text-2xl font-light text-foreground md:text-3xl">
+              システムアーキテクチャ
+            </h2>
+            <div className="rounded-lg bg-foreground/5 p-6 font-mono text-sm leading-relaxed text-foreground/90 md:text-base">
+              <pre className="whitespace-pre-wrap">{project.architecture}</pre>
+            </div>
+          </section>
+        )}
+
+        {/* 実装のポイント */}
+        {project.implementationPoints &&
+          project.implementationPoints.length > 0 && (
+            <section className="mb-12">
+              <h2 className="mb-4 font-sans text-2xl font-light text-foreground md:text-3xl">
+                実装のポイント
+              </h2>
+              <ul className="space-y-3">
+                {project.implementationPoints.map((point) => (
+                  <li
+                    key={point}
+                    className="relative pl-6 text-foreground/90 before:absolute before:left-0 before:content-['•'] md:text-lg"
+                  >
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+        {/* コードの特徴 */}
+        {project.codeFeatures && project.codeFeatures.length > 0 && (
+          <section className="mb-12">
+            <h2 className="mb-4 font-sans text-2xl font-light text-foreground md:text-3xl">
+              コードの特徴
+            </h2>
+            <ul className="space-y-3">
+              {project.codeFeatures.map((feature) => (
+                <li
+                  key={feature}
+                  className="relative pl-6 text-foreground/90 before:absolute before:left-0 before:content-['•'] md:text-lg"
+                >
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {/* 今後の改善案 */}
+        {project.futureImprovements &&
+          project.futureImprovements.length > 0 && (
+            <section className="mb-12">
+              <h2 className="mb-4 font-sans text-2xl font-light text-foreground md:text-3xl">
+                今後の改善案
+              </h2>
+              <ul className="space-y-3">
+                {project.futureImprovements.map((improvement) => (
+                  <li
+                    key={improvement}
+                    className="relative pl-6 text-foreground/90 before:absolute before:left-0 before:content-['•'] md:text-lg"
+                  >
+                    {improvement}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+        {/* 学んだこと */}
+        {project.learnings && project.learnings.length > 0 && (
+          <section className="mb-12">
+            <h2 className="mb-4 font-sans text-2xl font-light text-foreground md:text-3xl">
+              学んだこと
+            </h2>
+            <ul className="space-y-3">
+              {project.learnings.map((learning) => (
+                <li
+                  key={learning}
+                  className="relative pl-6 text-foreground/90 before:absolute before:left-0 before:content-['•'] md:text-lg"
+                >
+                  {learning}
                 </li>
               ))}
             </ul>
