@@ -25,6 +25,37 @@ export const useScrollContainer = () => {
     };
 
     const handleTouchMove = (e: TouchEvent) => {
+      // セクション内のスクロール可能な要素をチェック
+      if (!scrollContainerRef.current) return;
+
+      const container = scrollContainerRef.current;
+      const sectionWidth = container.offsetWidth;
+      const currentScrollLeft = container.scrollLeft;
+      const currentSectionIndex = Math.round(currentScrollLeft / sectionWidth);
+      const sections = container.children;
+      const currentSectionElement = sections[
+        currentSectionIndex
+      ] as HTMLElement;
+
+      if (currentSectionElement) {
+        const scrollableElement = currentSectionElement.querySelector(
+          "[data-scrollable='true'], .overflow-y-auto",
+        ) as HTMLElement;
+
+        if (scrollableElement) {
+          const { scrollTop, scrollHeight, clientHeight } = scrollableElement;
+          const isAtTop = scrollTop === 0;
+          const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
+          const deltaY = e.touches[0].clientY - touchStartY.current;
+
+          // セクション内でスクロール可能な場合、タッチイベントを許可
+          if ((deltaY < 0 && !isAtBottom) || (deltaY > 0 && !isAtTop)) {
+            return; // セクション内スクロールを許可
+          }
+        }
+      }
+
+      // セクション間の移動の場合のみ、縦スクロールを防止
       if (Math.abs(e.touches[0].clientY - touchStartY.current) > 10) {
         e.preventDefault();
       }
@@ -36,6 +67,36 @@ export const useScrollContainer = () => {
       const deltaY = touchStartY.current - touchEndY;
       const deltaX = touchStartX.current - touchEndX;
 
+      // セクション内のスクロール可能な要素をチェック
+      if (!scrollContainerRef.current) return;
+
+      const container = scrollContainerRef.current;
+      const sectionWidth = container.offsetWidth;
+      const currentScrollLeft = container.scrollLeft;
+      const currentSectionIndex = Math.round(currentScrollLeft / sectionWidth);
+      const sections = container.children;
+      const currentSectionElement = sections[
+        currentSectionIndex
+      ] as HTMLElement;
+
+      if (currentSectionElement) {
+        const scrollableElement = currentSectionElement.querySelector(
+          "[data-scrollable='true'], .overflow-y-auto",
+        ) as HTMLElement;
+
+        if (scrollableElement) {
+          const { scrollTop, scrollHeight, clientHeight } = scrollableElement;
+          const isAtTop = scrollTop === 0;
+          const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1;
+
+          // セクション内でスクロール可能な場合、セクション移動はしない
+          if ((deltaY > 0 && !isAtTop) || (deltaY < 0 && !isAtBottom)) {
+            return; // セクション内スクロールが可能な場合は、セクション移動をしない
+          }
+        }
+      }
+
+      // セクション間の移動
       if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 50) {
         if (deltaY > 0 && currentSection < 4) {
           scrollToSection(currentSection + 1);
@@ -71,8 +132,6 @@ export const useScrollContainer = () => {
 
     const handleWheel = (e: WheelEvent) => {
       if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-        e.preventDefault();
-
         if (!scrollContainerRef.current) return;
 
         const container = scrollContainerRef.current;
@@ -81,6 +140,62 @@ export const useScrollContainer = () => {
         const currentSectionIndex = Math.round(
           currentScrollLeft / sectionWidth,
         );
+
+        // 現在のセクション要素を取得
+        const sections = container.children;
+        const currentSectionElement = sections[
+          currentSectionIndex
+        ] as HTMLElement;
+
+        if (!currentSectionElement) return;
+
+        // セクション内のスクロール可能な要素を探す
+        const scrollableElement = currentSectionElement.querySelector(
+          "[data-scrollable='true']",
+        ) as HTMLElement;
+
+        // セクション内にスクロール可能な要素がある場合
+        if (scrollableElement) {
+          const { scrollTop, scrollHeight, clientHeight } = scrollableElement;
+          const canScroll = scrollHeight > clientHeight; // スクロール可能かチェック
+          const isAtTop = scrollTop <= 1; // 1pxの誤差を許容
+          const isAtBottom = scrollTop + clientHeight >= scrollHeight - 1; // 1pxの誤差を許容
+
+          // スクロール可能な場合のみ処理
+          if (canScroll) {
+            // 下にスクロール
+            if (e.deltaY > 0) {
+              // セクション内が最下部に達していない場合、セクション内をスクロール
+              if (!isAtBottom) {
+                e.preventDefault();
+                e.stopPropagation();
+                scrollableElement.scrollBy({
+                  top: e.deltaY,
+                  behavior: "auto",
+                });
+                return; // セクション内スクロールを実行したので、横スクロールはしない
+              }
+              // 最下部に達している場合、次のセクションへ移動
+            } else {
+              // 上にスクロール
+              // セクション内が最上部に達していない場合、セクション内をスクロール
+              if (!isAtTop) {
+                e.preventDefault();
+                e.stopPropagation();
+                scrollableElement.scrollBy({
+                  top: e.deltaY,
+                  behavior: "auto",
+                });
+                return; // セクション内スクロールを実行したので、横スクロールはしない
+              }
+              // 最上部に達している場合、前のセクションへ移動
+            }
+          }
+        }
+
+        // セクション内にスクロール可能な要素がない、または端に達している場合
+        // 横スクロール（セクション移動）を実行
+        e.preventDefault();
 
         // スクロール量に応じて次のセクションを決定
         const scrollThreshold = sectionWidth * 0.3; // 30%スクロールしたら次のセクションへ

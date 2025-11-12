@@ -1,5 +1,7 @@
 "use client";
 
+import clsx from "clsx";
+
 interface NavigationProps {
   currentSection: number;
   scrollToSection: (index: number) => void;
@@ -15,9 +17,11 @@ export const Navigation = ({
 
   return (
     <nav
-      className={`fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-6 py-6 transition-opacity duration-700 md:px-12 ${
-        isLoaded ? "opacity-100" : "opacity-0"
-      }`}
+      className={clsx(
+        "fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-6 py-6 transition-opacity duration-700 md:px-12",
+        isLoaded ? "opacity-100" : "opacity-0",
+        "select-none",
+      )}
     >
       <button
         type="button"
@@ -38,17 +42,19 @@ export const Navigation = ({
             key={item}
             type="button"
             onClick={() => scrollToSection(index)}
-            className={`group relative font-sans text-sm font-medium transition-colors ${
+            className={clsx(
+              "group relative font-sans text-sm font-medium transition-colors",
               currentSection === index
                 ? "text-foreground"
-                : "text-foreground/80 hover:text-foreground"
-            }`}
+                : "text-foreground/80 hover:text-foreground",
+            )}
           >
             {item}
             <span
-              className={`absolute -bottom-1 left-0 h-px bg-foreground transition-all duration-300 ${
-                currentSection === index ? "w-full" : "w-0 group-hover:w-full"
-              }`}
+              className={clsx(
+                "absolute -bottom-1 left-0 h-px bg-foreground transition-all duration-300",
+                currentSection === index ? "w-full" : "w-0 group-hover:w-full",
+              )}
             />
           </button>
         ))}

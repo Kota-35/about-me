@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Tag } from "@/components/tags";
 
 interface HeroSectionProps {
   scrollToSection?: ((index: number) => void) | null;
@@ -36,39 +36,9 @@ export const HeroSection = ({
         </div>
 
         <div className="mb-8 flex animate-in fade-in slide-in-from-bottom-4 flex-wrap gap-2 duration-1000 delay-400">
-          <span className="flex items-center gap-1.5 rounded-full border border-foreground/20 bg-foreground/10 px-3 py-1 font-mono text-xs text-foreground/90 backdrop-blur-md">
-            <Image
-              src="/python-icon.svg"
-              alt="Python"
-              width={14}
-              height={14}
-              className="h-3.5 w-3.5"
-              unoptimized
-            />
-            Python
-          </span>
-          <span className="flex items-center gap-1.5 rounded-full border border-foreground/20 bg-foreground/10 px-3 py-1 font-mono text-xs text-foreground/90 backdrop-blur-md">
-            <Image
-              src="/typescript-icon.svg"
-              alt="TypeScript"
-              width={14}
-              height={14}
-              className="h-3.5 w-3.5"
-              unoptimized
-            />
-            TypeScript
-          </span>
-          <span className="flex items-center gap-1.5 rounded-full border border-foreground/20 bg-foreground/10 px-3 py-1 font-mono text-xs text-foreground/90 backdrop-blur-md">
-            <Image
-              src="/rust-icon.svg"
-              alt="Rust"
-              width={14}
-              height={14}
-              className="h-3.5 w-3.5"
-              unoptimized
-            />
-            Rust
-          </span>
+          <Tag name="Python" />
+          <Tag name="TypeScript" />
+          <Tag name="Rust" />
         </div>
       </div>
 
