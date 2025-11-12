@@ -1,14 +1,14 @@
 "use client";
 
+import Image from "next/image";
+import { MagneticButton } from "@/components/MagneticButton";
 import { Tag } from "@/components/tags";
 
 interface HeroSectionProps {
   scrollToSection?: ((index: number) => void) | null;
 }
 
-export const HeroSection = ({
-  scrollToSection: _scrollToSection,
-}: HeroSectionProps) => {
+export const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
   return (
     <section className="relative flex min-h-screen w-screen shrink-0 snap-center flex-col justify-end px-6 pb-16 pt-24 select-none md:px-12 md:pb-24">
       <div className="max-w-3xl">
@@ -39,6 +39,34 @@ export const HeroSection = ({
           <Tag name="Python" />
           <Tag name="TypeScript" />
           <Tag name="Rust" />
+        </div>
+
+        <div className="flex animate-in fade-in slide-in-from-bottom-4 flex-col gap-4 duration-1000 delay-300 sm:flex-row sm:items-center">
+          <MagneticButton
+            size="lg"
+            variant="primary"
+            onClick={() => window.open("https://github.com/Kota-35", "_blank")}
+          >
+            <div className="flex items-center gap-2">
+              <Image
+                src="/github-icon.svg"
+                alt="GitHub"
+                width={20}
+                height={20}
+                className="h-5 w-5"
+              />
+              <span>GitHub</span>
+            </div>
+          </MagneticButton>
+          {scrollToSection && (
+            <MagneticButton
+              size="lg"
+              variant="secondary"
+              onClick={() => scrollToSection(3)}
+            >
+              View My Work
+            </MagneticButton>
+          )}
         </div>
       </div>
 
