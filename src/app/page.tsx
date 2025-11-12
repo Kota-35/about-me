@@ -1,6 +1,10 @@
+"use client";
+
 import clsx from "clsx";
-import { CustomCursor } from "@/features/CustomCursor";
-import { GrainOverlay } from "@/features/GrainOverlay";
+import { CustomCursor } from "@/components/CustomCursor";
+import { GrainOverlay } from "@/components/GrainOverlay";
+import { ShaderContainer } from "@/components/ShaderContainer";
+import { ScrollContainer } from "./__components/ScrollContainer";
 
 const Home = () => {
   return (
@@ -15,6 +19,10 @@ const Home = () => {
     >
       <CustomCursor />
       <GrainOverlay />
+      <ShaderContainer />
+      <ScrollContainer>
+        {/* スクロール可能なコンテンツをここに追加 */}
+      </ScrollContainer>
     </main>
   );
 };

@@ -20,6 +20,9 @@ importers:
       react-dom:
         specifier: 19.2.0
         version: 19.2.0(react@19.2.0)
+      shaders:
+        specifier: ^2.1.9
+        version: 2.1.9
     devDependencies:
       '@biomejs/biome':
         specifier: 2.2.0
@@ -566,6 +569,9 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  shaders@2.1.9:
+    resolution: {integrity: sha512-HIwPTkoJ7zXU1HLLP64EFwRNsr45EbZzg7T7+N73immvG+8aWICB+qg1flrSpfT9gA+fEnFpfdlwI70Gtugdsw==}
+
   sharp@0.34.5:
     resolution: {integrity: sha512-Ou9I5Ft9WNcCbXrU9cMgPBcCK8LiwLqcbywW3t4oDV37n1pzpuNLsYiAV8eODnjbtQlSDwZ2cUEeQz4E54Hltg==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
@@ -998,6 +1004,8 @@ snapshots:
 
   semver@7.7.3:
     optional: true
+
+  shaders@2.1.9: {}
 
   sharp@0.34.5:
     dependencies:
