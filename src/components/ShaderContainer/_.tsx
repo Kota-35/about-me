@@ -14,8 +14,8 @@ export const ShaderContainer = () => {
     >
       <Shader className="h-full w-full">
         <Swirl
-          colorA="#6366f1"
-          colorB="#8b5cf6"
+          colorA="#22c55e"
+          colorB="#22d3ee"
           speed={0.8}
           detail={0.8}
           blend={50}
@@ -27,11 +27,11 @@ export const ShaderContainer = () => {
           fineY={40}
         />
         <ChromaFlow
-          baseColor="#6366f1"
-          upColor="#818cf8"
-          downColor="#a78bfa"
-          leftColor="#8b5cf6"
-          rightColor="#7c3aed"
+          baseColor="#22c55e"
+          upColor="#22d3ee"
+          downColor="#22c55e"
+          leftColor="#06b6d4"
+          rightColor="#38bdf8"
           intensity={0.9}
           radius={1.8}
           momentum={25}
