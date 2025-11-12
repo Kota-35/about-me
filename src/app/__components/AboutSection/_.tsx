@@ -80,7 +80,7 @@ export const AboutSection = ({
                       style={{ transitionDelay: `${200 + index * 100}ms` }}
                     >
                       {/* タイムラインのドット */}
-                      <div className="absolute left-3 h-3 w-3 rounded-full border-2 border-foreground/30 bg-background md:left-6" />
+                      <div className="absolute left-3 h-4 w-4 rounded-full border-2 border-foreground/30 bg-background md:left-6" />
 
                       <div className="ml-12 md:ml-16">
                         {/* 期間とタイトル */}
