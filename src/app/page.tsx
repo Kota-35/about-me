@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { CustomCursor } from "@/features/cursor";
+import { CustomCursor } from "@/features/CustomCursor";
 import { GrainOverlay } from "@/features/GrainOverlay";
 
 const Home = () => {
