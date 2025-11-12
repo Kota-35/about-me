@@ -140,5 +140,5 @@ export const useScrollContainer = () => {
     };
   }, [currentSection]);
 
-  return { scrollContainerRef };
+  return { scrollContainerRef, currentSection, scrollToSection };
 };
