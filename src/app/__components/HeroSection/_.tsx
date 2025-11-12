@@ -46,6 +46,7 @@ export const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
             size="lg"
             variant="primary"
             onClick={() => window.open("https://github.com/Kota-35", "_blank")}
+            borderGlow="rainbow"
           >
             <div className="flex items-center gap-2">
               <Image
@@ -62,7 +63,8 @@ export const HeroSection = ({ scrollToSection }: HeroSectionProps) => {
             <MagneticButton
               size="lg"
               variant="secondary"
-              onClick={() => scrollToSection(3)}
+              onClick={() => scrollToSection(2)}
+              borderGlow="silver"
             >
               View My Work
             </MagneticButton>

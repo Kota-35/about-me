@@ -24,3 +24,62 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes silver-glow {
+  0%,
+  100% {
+    border-color: rgba(192, 192, 192, 0.5);
+    box-shadow: 0 0 10px rgba(192, 192, 192, 0.3);
+  }
+  50% {
+    border-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+  }
+}
+
+@keyframes rainbow-glow {
+  0% {
+    border-color: rgba(255, 0, 150, 0.8);
+    box-shadow: 0 0 15px rgba(255, 0, 150, 0.5);
+  }
+  16.66% {
+    border-color: rgba(255, 100, 0, 0.8);
+    box-shadow: 0 0 15px rgba(255, 100, 0, 0.5);
+  }
+  33.33% {
+    border-color: rgba(255, 255, 0, 0.8);
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.5);
+  }
+  50% {
+    border-color: rgba(0, 255, 0, 0.8);
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+  }
+  66.66% {
+    border-color: rgba(0, 150, 255, 0.8);
+    box-shadow: 0 0 15px rgba(0, 150, 255, 0.5);
+  }
+  83.33% {
+    border-color: rgba(150, 0, 255, 0.8);
+    box-shadow: 0 0 15px rgba(150, 0, 255, 0.5);
+  }
+  100% {
+    border-color: rgba(255, 0, 150, 0.8);
+    box-shadow: 0 0 15px rgba(255, 0, 150, 0.5);
+  }
+}
+
+.magnetic-button-silver-glow {
+  border: 1px solid rgba(192, 192, 192, 0.3);
+}
+
+.magnetic-button-silver-glow:hover {
+  animation: silver-glow 2s ease-in-out infinite;
+}
+
+.magnetic-button-rainbow-glow {
+  border: 1px solid rgba(255, 0, 150, 0.5);
+}
+
+.magnetic-button-rainbow-glow:hover {
+  animation: rainbow-glow 3s ease-in-out infinite;
+}

@@ -9,6 +9,7 @@ interface MagneticButtonProps {
   variant?: "primary" | "secondary" | "ghost";
   size?: "default" | "lg";
   onClick?: () => void;
+  borderGlow?: "silver" | "rainbow";
 }
 
 export const MagneticButton = ({
@@ -17,6 +18,7 @@ export const MagneticButton = ({
   variant = "primary",
   size = "default",
   onClick,
+  borderGlow,
 }: MagneticButtonProps) => {
   const ref = useRef<HTMLButtonElement>(null);
   const positionRef = useRef({ x: 0, y: 0 });
@@ -63,6 +65,13 @@ export const MagneticButton = ({
     lg: "px-8 py-3.5 text-base",
   };
 
+  const borderGlowClass =
+    borderGlow === "silver"
+      ? "magnetic-button-silver-glow"
+      : borderGlow === "rainbow"
+        ? "magnetic-button-rainbow-glow"
+        : "";
+
   return (
     <button
       type="button"
@@ -75,6 +84,7 @@ export const MagneticButton = ({
         transition-all duration-300 ease-out will-change-transform
         ${variants[variant]}
         ${sizes[size]}
+        ${borderGlowClass}
         ${className}
       `}
       style={{

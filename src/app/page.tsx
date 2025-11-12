@@ -7,9 +7,11 @@ import { GrainOverlay } from "@/components/GrainOverlay";
 import { ShaderContainer } from "@/components/ShaderContainer";
 import { useShaderContainer } from "@/components/ShaderContainer/_.hook";
 import { AboutSection } from "./__components/AboutSection";
+import { ContactSection } from "./__components/ContactSection";
 import { HeroSection } from "./__components/HeroSection";
 import { Navigation } from "./__components/Navigation";
 import { ScrollContainer } from "./__components/ScrollContainer";
+import { WorkSection } from "./__components/WorkSection";
 
 const Home = () => {
   const { isLoaded } = useShaderContainer();
@@ -51,6 +53,14 @@ const Home = () => {
       <ScrollContainer onSectionChange={handleSectionChange}>
         <HeroSection scrollToSection={scrollToSection} />
         <AboutSection
+          scrollToSection={scrollToSection}
+          currentSection={currentSection}
+        />
+        <WorkSection
+          scrollToSection={scrollToSection}
+          currentSection={currentSection}
+        />
+        <ContactSection
           scrollToSection={scrollToSection}
           currentSection={currentSection}
         />
