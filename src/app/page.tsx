@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { CustomCursor } from "@/features/cursor";
+import { GrainOverlay } from "@/features/GrainOverlay";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       )}
     >
       <CustomCursor />
+      <GrainOverlay />
     </main>
   );
 };
